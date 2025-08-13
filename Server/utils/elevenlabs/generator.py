@@ -27,7 +27,7 @@ async def AudioGeneratorFromTextGenerator(
             buffer += chunk + " "
 
 
-            if len(buffer) > BUFFER_LENGTH or any(punct in buffer for punct in [ "." , "," , "?"]):
+            if any(punct in buffer for punct in [ "." , "," , "?"]):
 
                 try:
                     audio_stream = client.text_to_speech.stream(

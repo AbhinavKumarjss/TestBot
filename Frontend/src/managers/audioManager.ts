@@ -1,8 +1,8 @@
 
 export class AudioManager {
-    MIN_BUFFER_SIZE = 1;
-    RESUME_BUFFER_SIZE = 1;
-    CONCAT_CHUNK_SIZE = 2;
+    MIN_BUFFER_SIZE = 2;
+    RESUME_BUFFER_SIZE = 2;
+    CONCAT_CHUNK_SIZE = 3;
     TARGET_CHUNK_DURATION = 0.5;
     
     CHANNELS = 1;

@@ -14,6 +14,7 @@ import {
   RotateCcw,
   Activity
 } from 'lucide-react';
+import { apiBase } from '../../config';
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState('pinecone');
@@ -37,7 +38,7 @@ const AdminDashboard = () => {
   const [scrapeResults, setScrapeResults] = useState(null);
   const [notifications, setNotifications] = useState([]);
 
-  const API_BASE = import.meta.env.VITE_SERVER_API_URL; // Adjust this to your API base URL
+  const API_BASE = apiBase; // Use configuration from config.ts
 
   const addNotification = (message, type = 'info') => {
     const id = Date.now();
@@ -50,7 +51,7 @@ const AdminDashboard = () => {
   const apiCall = async (endpoint, method = 'GET', body = null) => {
     setLoading(true);
     try {
-      const options = {
+      const options: any = {
         method,
         headers: { 'Content-Type': 'application/json' },
       };

@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 import { IoSend, IoCall, IoCallSharp } from "react-icons/io5";
 import { Manager } from "../../managers/manager";
+import { wsUrl } from "../../config";
 
 
 
@@ -38,7 +39,6 @@ export default function Home() {
     // Initialize Manager when chat opens
     useEffect(() => {
         if (chatOpen && !managerRef.current) {
-            const wsUrl = "ws://localhost:8000/api/user/ws";
             
             const onMessageUpdate = (messageId, chunk, isLoading, isComplete = false) => {
                 setMessages(prev => prev.map(msg => 

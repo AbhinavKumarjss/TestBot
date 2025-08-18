@@ -54,8 +54,8 @@ const AdminDashboard = () => {
       const options: any = {
         method,
         headers: { 'Content-Type': 'application/json' },
+        ...(body && { body: JSON.stringify(body) })
       };
-      if (body) options.body = JSON.stringify(body);
       
       const response = await fetch(`${API_BASE}${endpoint}`, options);
       const data = await response.json();

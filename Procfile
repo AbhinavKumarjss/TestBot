@@ -1,1 +1,1 @@
-web: cd /var/www/generalchatbot/Server && source venv/bin/activate && python server.py 
+web: cd /var/app/current/Server && ./venv/bin/python server.py 

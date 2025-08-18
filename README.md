@@ -587,7 +587,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 <p align="center"><b>GeneralChatbot</b> – Making AI conversations as natural as talking to a friend! 🚀</p>
 
-<p align="center">Built with ❤️ by <a href="https://github.com/chirag">@chirag</a></p>
+<p align="center">README built with ❤️ by <a href="https://github.com/codeBunny2022">@chirag</a></p>
 
 ## 🧯 Current Status & Known Issues
 

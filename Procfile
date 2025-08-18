@@ -1,0 +1,1 @@
+web: cd /var/www/generalchatbot/Server && source venv/bin/activate && python server.py 

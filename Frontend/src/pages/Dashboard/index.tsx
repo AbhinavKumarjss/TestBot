@@ -38,7 +38,7 @@ const AdminDashboard = () => {
   const [scrapeResults, setScrapeResults] = useState(null);
   const [notifications, setNotifications] = useState([]);
 
-  const API_BASE = apiBase; // Use configuration from config.ts
+  const API_BASE = `${apiBase}/admin`; // Use /api/admin prefix
 
   const addNotification = (message, type = 'info') => {
     const id = Date.now();
@@ -58,10 +58,28 @@ const AdminDashboard = () => {
       };
       
       const response = await fetch(`${API_BASE}${endpoint}`, options);
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      addNotification(`Error: ${error.message}`, 'error');
+      const contentType = response.headers.get('content-type') || '';
+
+      if (contentType.includes('application/json')) {
+        const data = await response.json();
+        if (!response.ok) {
+          const message = data?.message || data?.detail || `HTTP ${response.status}`;
+          throw new Error(message);
+        }
+        return data;
+      } else {
+        const text = await response.text();
+        if (!response.ok) {
+          throw new Error(text || `HTTP ${response.status}`);
+        }
+        try {
+          return JSON.parse(text);
+        } catch {
+          return { message: text };
+        }
+      }
+    } catch (error: any) {
+      addNotification(`Error: ${error.message || String(error)}`, 'error');
       return null;
     } finally {
       setLoading(false);

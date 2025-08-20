@@ -45,50 +45,94 @@ async def dashboard():
 
 @admin_router.post('/pinecone/index/change')
 async def pineconeChangeIndex(request:PineconeSetIndexRequest):
-    success , hasCreated = pc.switch_index(request.indexName)
-    return JSONResponse({"success":success,"created":hasCreated})
+    try:
+        success , hasCreated = pc.switch_index(request.indexName)
+        return JSONResponse({"success":success,"created":hasCreated})
+    except Exception as e:
+        traceback.print_exc()
+        return JSONResponse({"success": False, "message": str(e)}, status_code=500)
 
 @admin_router.get('/pinecone/index/get')
 async def pineconeGetIndex():
-    return JSONResponse({"name":pc.getIndexName()})
+    try:
+        return JSONResponse({"name":pc.getIndexName()})
+    except Exception as e:
+        traceback.print_exc()
+        return JSONResponse({"success": False, "message": str(e)}, status_code=500)
 
 @admin_router.get('/pinecone/index/delete')
 async def pineconeDeleteIndex():
-    return JSONResponse({"success":pc.delete_index()})
+    try:
+        return JSONResponse({"success":pc.delete_index()})
+    except Exception as e:
+        traceback.print_exc()
+        return JSONResponse({"success": False, "message": str(e)}, status_code=500)
 
 @admin_router.post('/pinecone/data/query')
 async def pineconeDataQuery(request : PineconeQueryIndexRequest):
-    return pc.query_index(request.query,request.top)
+    try:
+        return pc.query_index(request.query,request.top)
+    except Exception as e:
+        traceback.print_exc()
+        return JSONResponse({"success": False, "message": str(e)}, status_code=500)
 
 @admin_router.post('/pinecone/data/add')
 async def pineconeDataAdd(request : PineconeDataAddRequest):
-    return  JSONResponse({"success" : pc.add_data_to_index(request.textarray)})
+    try:
+        return  JSONResponse({"success" : pc.add_data_to_index(request.textarray)})
+    except Exception as e:
+        traceback.print_exc()
+        return JSONResponse({"success": False, "message": str(e)}, status_code=500)
 
 ############################### PROMPT REQUEST ##########################
 
 @admin_router.post('/prompt/chat/set')
 async def SetChatPrompt(request:SetPromptRequest):
-    return set_chat_prompt(request.systemprompt)
+    try:
+        return set_chat_prompt(request.systemprompt)
+    except Exception as e:
+        traceback.print_exc()
+        return JSONResponse({"success": False, "message": str(e)}, status_code=500)
 
 @admin_router.get('/prompt/chat/get')
 async def GetChatPrompt():
-    return JSONResponse({"prompt":get_chat_prompt()})
+    try:
+        return JSONResponse({"prompt":get_chat_prompt()})
+    except Exception as e:
+        traceback.print_exc()
+        return JSONResponse({"success": False, "message": str(e)}, status_code=500)
 
 @admin_router.get('/prompt/chat/reset')
 async def ResetChatPrompt():
-    return JSONResponse({"success" : reset_chat_prompt()})
+    try:
+        return JSONResponse({"success" : reset_chat_prompt()})
+    except Exception as e:
+        traceback.print_exc()
+        return JSONResponse({"success": False, "message": str(e)}, status_code=500)
 
 @admin_router.post('/prompt/voice/set')
 async def SetVoicePrompt(request:SetPromptRequest):
-    return set_voice_prompt(request.systemprompt)
+    try:
+        return set_voice_prompt(request.systemprompt)
+    except Exception as e:
+        traceback.print_exc()
+        return JSONResponse({"success": False, "message": str(e)}, status_code=500)
 
 @admin_router.get('/prompt/voice/get')
 async def GetVoicePrompt():
-    return JSONResponse({"prompt":get_voice_prompt()})
+    try:
+        return JSONResponse({"prompt":get_voice_prompt()})
+    except Exception as e:
+        traceback.print_exc()
+        return JSONResponse({"success": False, "message": str(e)}, status_code=500)
 
 @admin_router.get('/prompt/voice/reset')
 async def ResetVoicePrompt():
-    return JSONResponse({"success" : reset_voice_prompt()})
+    try:
+        return JSONResponse({"success" : reset_voice_prompt()})
+    except Exception as e:
+        traceback.print_exc()
+        return JSONResponse({"success": False, "message": str(e)}, status_code=500)
 
 
 ########################################################
@@ -121,5 +165,5 @@ async def scrap_url(request: ScrapeRequest):
         return {"success": True, "text": text}
     except Exception as e:
         traceback.print_exc()
-        return {"success": False, "message": f"Error scraping URL: {str(e)}"}
+        return JSONResponse({"success": False, "message": f"Error scraping URL: {str(e)}"}, status_code=500)
 

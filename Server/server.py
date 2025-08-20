@@ -5,7 +5,7 @@ from typing import List, Optional
 import uvicorn
 from llm.llm import LLM
 from fastapi.staticfiles import StaticFiles
-from starlette.responses import FileResponse
+from starlette.responses import FileResponse, JSONResponse
 import os
 
 from elevenlabs.client import ElevenLabs
@@ -119,11 +119,11 @@ class Server:
             async def serve_index_root():
                 return FileResponse(index_file)
 
-            # SPA fallback: any non-API path returns index.html
+            # SPA fallback: serve index.html for non-API routes only
             @self.app.get("/{full_path:path}", include_in_schema=False)
             async def spa_fallback(full_path: str):
                 if full_path.startswith("api"):
-                    return FileResponse(index_file, status_code=404)
+                    return JSONResponse({"detail": "Not Found"}, status_code=404)
                 return FileResponse(index_file)
 
 

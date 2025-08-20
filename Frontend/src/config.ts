@@ -7,13 +7,11 @@ const config = {
   production: {
     // Use same domain as the app (served by Nginx) and proxy to backend via /api
     get wsUrl() {
-      const wsProto = typeof window !== 'undefined' && window.location.protocol === 'https:' ? 'wss' : 'ws';
-      const host = typeof window !== 'undefined' ? window.location.host : '';
-      return `${wsProto}://${host}/api/user/ws`;
+
+      return import.meta.env.VITE_WEBSOCKET_URL ;
     },
     get apiBase() {
-      const origin = typeof window !== 'undefined' ? window.location.origin : '';
-      return `${origin}/api`;
+      return import.meta.env.VITE_SERVER_API_URL;
     }
   }
 };

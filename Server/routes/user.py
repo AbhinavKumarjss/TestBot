@@ -18,7 +18,7 @@ async def Connect(websocket: WebSocket):
     try:
         while True:
                 message = await websocket.receive_json()
-
+                print("Message received on server :",message)
                 type = message['type']
                 question = message['question'].strip()
                 chat_history = message.get('chat_history', [])
@@ -47,6 +47,7 @@ async def Connect(websocket: WebSocket):
                         buffer += chunk
                         if any(punct in buffer for punct in [".", "?", ","]):
                             try:
+                                print("sending : ",buffer)
                                 await websocket.send_json({"type":"chat","data":buffer})
                                 buffer=""
                             except Exception as send_error:

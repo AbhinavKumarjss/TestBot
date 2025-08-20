@@ -2,11 +2,11 @@
 const config = {
   development: {
     wsUrl: "ws://localhost:8000/api/user/ws",
-    apiBase: "http://localhost:8000/api"
+    apiBase: "http://localhost:8000/api/admin"
   },
   production: {
     wsUrl: "wss://yourdomain.com/api/user/ws", // Replace with your actual domain
-    apiBase: "https://yourdomain.com/api" // Replace with your actual domain
+    apiBase: "https://yourdomain.com/api/admin" // Replace with your actual domain
   }
 };
 

@@ -52,7 +52,7 @@
 **GeneralChatbot bridges the gap between human conversation and AI intelligence!**
 
 ### The Problem
-- Complex AI interactions requiring technical knowledg
+- Complex AI interactions requiring technical knowled
 - Lack of natural voice-based AI assistants
 - Difficulty in maintaining conversation context
 - Limited knowledge base integration in chatbots
